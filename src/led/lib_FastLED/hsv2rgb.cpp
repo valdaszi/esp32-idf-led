@@ -1,4 +1,7 @@
-#define FASTLED_INTERNAL
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdint.h>
 #include "pixeltypes.h"
 
@@ -492,19 +495,19 @@ void hsv2rgb_rainbow( const CHSV& hsv, CRGB& rgb)
 }
 
 
-void hsv2rgb_raw(const struct CHSV * phsv, struct CRGB * prgb, int numLeds) {
+void hsv2rgb_raw_leds(const struct CHSV * phsv, struct CRGB * prgb, int numLeds) {
     for(int i = 0; i < numLeds; i++) {
         hsv2rgb_raw(phsv[i], prgb[i]);
     }
 }
 
-void hsv2rgb_rainbow( const struct CHSV* phsv, struct CRGB * prgb, int numLeds) {
+void hsv2rgb_rainbow_leds( const struct CHSV* phsv, struct CRGB * prgb, int numLeds) {
     for(int i = 0; i < numLeds; i++) {
         hsv2rgb_rainbow(phsv[i], prgb[i]);
     }
 }
 
-void hsv2rgb_spectrum( const struct CHSV* phsv, struct CRGB * prgb, int numLeds) {
+void hsv2rgb_spectrum_leds( const struct CHSV* phsv, struct CRGB * prgb, int numLeds) {
     for(int i = 0; i < numLeds; i++) {
         hsv2rgb_spectrum(phsv[i], prgb[i]);
     }
@@ -707,3 +710,7 @@ CHSV rgb2hsv_approximate( const CRGB& rgb)
 //   252,0,126
 //   252,252,0
 //   252,252,126
+
+#ifdef __cplusplus
+}
+#endif

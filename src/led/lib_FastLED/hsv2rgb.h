@@ -12,7 +12,7 @@
 //                   NOTE: here hue is 0-255, not just 0-191
 
 void hsv2rgb_rainbow( const struct CHSV& hsv, struct CRGB& rgb);
-void hsv2rgb_rainbow( const struct CHSV* phsv, struct CRGB * prgb, int numLeds);
+void hsv2rgb_rainbow_leds( const struct CHSV* phsv, struct CRGB * prgb, int numLeds);
 #define HUE_MAX_RAINBOW 255
 
 
@@ -25,7 +25,7 @@ void hsv2rgb_rainbow( const struct CHSV* phsv, struct CRGB * prgb, int numLeds);
 //                    NOTE: here hue is 0-255, not just 0-191
 
 void hsv2rgb_spectrum( const struct CHSV& hsv, struct CRGB& rgb);
-void hsv2rgb_spectrum( const struct CHSV* phsv, struct CRGB * prgb, int numLeds);
+void hsv2rgb_spectrum_leds( const struct CHSV* phsv, struct CRGB * prgb, int numLeds);
 #define HUE_MAX_SPECTRUM 255
 
 
@@ -41,7 +41,7 @@ void hsv2rgb_spectrum( const struct CHSV* phsv, struct CRGB * prgb, int numLeds)
 //
 
 void hsv2rgb_raw(const struct CHSV& hsv, struct CRGB & rgb);
-void hsv2rgb_raw(const struct CHSV* phsv, struct CRGB * prgb, int numLeds);
+void hsv2rgb_raw_leds(const struct CHSV* phsv, struct CRGB * prgb, int numLeds);
 #define HUE_MAX 191
 
 

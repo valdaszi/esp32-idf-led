@@ -5,7 +5,11 @@
 
 static const char *TAG = "LED";
 
-LED::LED(dstrip_type_t strip_type, uint16_t length, uint8_t max_cc_val, gpio_num_t gpio_number)
+LED::LED(dstrip_type_t strip_type, uint16_t length, gpio_num_t gpio_number) : LED(strip_type, length, gpio_number, 32) {}
+
+LED::LED(dstrip_type_t strip_type, uint16_t length, gpio_num_t gpio_number, uint8_t max_cc_val) : LED(strip_type, length, gpio_number, max_cc_val, RMT_CHANNEL_0) {}
+
+LED::LED(dstrip_type_t strip_type, uint16_t length, gpio_num_t gpio_number, uint8_t max_cc_val, rmt_channel_t rmt_channel)
 {
     dled_strip_init(&strip);
     dled_strip_create(&strip, strip_type, length, max_cc_val);
@@ -23,7 +27,7 @@ LED::LED(dstrip_type_t strip_type, uint16_t length, uint8_t max_cc_val, gpio_num
         }
     }
 
-    err = rmt_dled_config(&rps, gpio_number, RMT_CHANNEL_0);
+    err = rmt_dled_config(&rps, gpio_number, rmt_channel);
     if (err != ESP_OK)
     {
         ESP_LOGE(TAG, "[0x%x] rmt_dled_config failed", err);
@@ -49,16 +53,12 @@ void LED::show()
     rmt_dled_send(&rps);
 }
 
-void LED::setPixel(uint16_t idx, CRGB color)
+void LED::clear()
 {
-    if (idx >= strip.length)
-    {
-        return;
-    }
-    strip.pixels[idx] = color;
+    setStripColor(0);
 }
 
-void LED::setColor(CRGB color)
+void LED::setStripColor(CRGB color)
 {
     for (uint16_t i = 0; i < strip.length; i++)
     {
