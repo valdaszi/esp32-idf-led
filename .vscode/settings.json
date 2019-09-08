@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "esp32_rmt_dled.h": "c",
+        "rmt_struct.h": "c",
+        "rmt.h": "c",
+        "led.h": "c"
+    }
+}
